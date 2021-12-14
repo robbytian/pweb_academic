@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faculty;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreFacultyRequest;
 use App\Http\Requests\UpdateFacultyRequest;
 
@@ -15,7 +16,8 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        //
+        $facultys = Faculty::all();
+        return view('faculty.index',['facultys'=>$facultys]);
     }
 
     /**
@@ -25,7 +27,7 @@ class FacultyController extends Controller
      */
     public function create()
     {
-        //
+        return view('faculty.create');
     }
 
     /**
@@ -34,9 +36,14 @@ class FacultyController extends Controller
      * @param  \App\Http\Requests\StoreFacultyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFacultyRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+        ]);
+
+        Faculty::create($request->all());
+        return redirect('/faculty')->with('success','Faculty Saved!');
     }
 
     /**
@@ -58,7 +65,7 @@ class FacultyController extends Controller
      */
     public function edit(Faculty $faculty)
     {
-        //
+        return view('faculty.edit', ['faculty'=>$faculty]);
     }
 
     /**
@@ -68,9 +75,14 @@ class FacultyController extends Controller
      * @param  \App\Models\Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFacultyRequest $request, Faculty $faculty)
+    public function update(Request $request, Faculty $faculty)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+        ]);
+
+        $faculty->update($request->all());
+        return redirect('/faculty')->with('success','Faculty Updated!');
     }
 
     /**
@@ -81,6 +93,7 @@ class FacultyController extends Controller
      */
     public function destroy(Faculty $faculty)
     {
-        //
+        $faculty->delete();
+        return redirect('/student')->with('success','Faculty deleted');
     }
 }
