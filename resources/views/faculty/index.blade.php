@@ -15,6 +15,7 @@
             <tr>
                 <td>No</td>
                 <td>Nama</td>
+                <td>Daftar Mahasiswa</td>
                 <td colspan=2></td>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$faculty->name}}</td>
+                <td><a href="/faculty/{{$faculty->id}}">{{count($faculty->students)}} Mahasiswa</a></td>
                 <td>
                     <a href="/faculty/{{$faculty->id}}/edit/" class="btn btn-primary">Edit</a>
                 </td>

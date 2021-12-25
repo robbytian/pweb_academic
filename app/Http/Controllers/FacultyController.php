@@ -54,7 +54,7 @@ class FacultyController extends Controller
      */
     public function show(Faculty $faculty)
     {
-        //
+        return view('faculty.show',compact('faculty'));
     }
 
     /**
@@ -94,6 +94,6 @@ class FacultyController extends Controller
     public function destroy(Faculty $faculty)
     {
         $faculty->delete();
-        return redirect('/student')->with('success','Faculty deleted');
+        return redirect('/faculty')->with('success','Faculty deleted');
     }
 }

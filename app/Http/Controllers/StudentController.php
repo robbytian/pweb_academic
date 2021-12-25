@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faculty;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        $faculties = Faculty::pluck('name','id');
+        return view('student.create',compact('faculties'));
     }
 
     /**
@@ -58,6 +60,7 @@ class StudentController extends Controller
             'gender'=>'required',
             'birth_place'=>'required',
             'birth_date'=>'required',
+            'faculty_id'=>'required'
         ]);
 
         Student::create($request->all());
@@ -83,7 +86,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('student.edit', ['student'=>$student]);
+        $faculties = Faculty::pluck('name','id');
+        return view('student.edit', ['student'=>$student,'faculties'=>$faculties]);
     }
 
     /**
@@ -101,6 +105,7 @@ class StudentController extends Controller
             'gender'=>'required',
             'birth_place'=>'required',
             'birth_date'=>'required',
+            'faculty_id'=>'required'
         ]);
 
         $student->update($request->all());

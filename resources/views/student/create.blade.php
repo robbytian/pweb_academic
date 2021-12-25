@@ -5,13 +5,13 @@
     <h3>Tambah Mahasiswa</h3>
 
     @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        </div><br>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div><br>
     @endif
 
     <form method="post" action="/student">
@@ -40,6 +40,16 @@
         <div class="form-group">
             <label for="code">Tanggal Lahir</label>
             <input type="date" class="form-control" name="birth_date">
+        </div>
+
+        <div class="form-group">
+            <label for="code">Tanggal Lahir</label>
+            <select name="faculty_id" class="form-control" id="">
+                <option value="">== Pilih Fakultas ==</option>
+                @foreach($faculties as $id => $name)
+                <option value="{{$id}}">{{$name}}</option>
+                @endforeach
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

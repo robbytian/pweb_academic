@@ -42,6 +42,16 @@
             <label for="code">Tanggal Lahir</label>
             <input type="date" class="form-control" name="birth_date" value="{{$student->birth_date}}">
         </div>
+
+        <div class="form-group">
+            <label for="code">Tanggal Lahir</label>
+            <select name="faculty_id" class="form-control" id="">
+                <option value="">== Pilih Fakultas ==</option>
+                @foreach($faculties as $id => $name)
+                <option value="{{$id}}" {{$id == $student->faculty_id ? "selected" : ""}}>{{$name}}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
